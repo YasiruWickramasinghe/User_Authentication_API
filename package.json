@@ -1,0 +1,27 @@
+{
+  "name": "user_authentication_api",
+  "version": "1.0.0",
+  "description": "Our project aims to develop a robust RESTful API using Node.js, Express.js, and MongoDB for data storage. The API will incorporate JWT authentication for secure user access control and authorization. By leveraging these tools, we will create a highly secure and efficient authentication and authorization system for our application.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YasiruWickramasinghe/User_Authentication_API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YasiruWickramasinghe/User_Authentication_API/issues"
+  },
+  "homepage": "https://github.com/YasiruWickramasinghe/User_Authentication_API#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "mongoose": "^7.3.1",
+    "nodemon": "^2.0.22"
+  }
+}
