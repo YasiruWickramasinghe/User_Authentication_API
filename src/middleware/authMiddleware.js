@@ -9,16 +9,23 @@ const authenticateUser = async (req, res, next) => {
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await User.findById(decoded.userId);
+      const user = await User.findById(decoded.userId);
 
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      req.user = user;
+      next();
+    } catch (error) {
+      if (error.name === 'TokenExpiredError') {
+        return res.status(401).json({ error: 'Token expired' });
+      }
+      throw error;
     }
-
-    req.user = user;
-    next();
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
