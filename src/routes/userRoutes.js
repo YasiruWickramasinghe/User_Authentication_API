@@ -1,6 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator');
-const { registerUser, loginUser, updateUserProfile, deleteUserProfile, logoutUser  } = require('../controllers/userController');
+const { registerUser, loginUser, updateUserProfileAndPassword, deleteUserProfile, logoutUser  } = require('../controllers/userController');
 const authenticateUser = require('../middleware/authMiddleware');
 const authorize = require('../middleware/authorizeMiddleware');
 
@@ -27,7 +27,6 @@ router.post(
   loginUser
 );
 
-// Update user profile
 router.put(
   '/profile',
   [
@@ -35,7 +34,7 @@ router.put(
     body('email').trim().isEmail().withMessage('Invalid email address'),
   ],
   authenticateUser,
-  updateUserProfile
+  updateUserProfileAndPassword
 );
 
 // Delete user profile

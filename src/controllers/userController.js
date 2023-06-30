@@ -77,27 +77,38 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-// Update user profile
-exports.updateUserProfile = async (req, res) => {
+// Update user profile and password
+exports.updateUserProfileAndPassword = async (req, res) => {
   try {
-    const { name, email } = req.body;
+    const { name, email, oldPassword, newPassword } = req.body;
     const user = await User.findById(req.user._id);
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
+    // If provided, verify and update the password
+    if (oldPassword && newPassword) {
+      const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+      if (!isPasswordValid) {
+        return res.status(401).json({ error: 'Invalid old password' });
+      }
+      user.password = newPassword;
+    }
+
+    // Update the profile details
     user.name = name || user.name;
     user.email = email || user.email;
 
     await user.save();
 
-    res.json({ message: 'User profile updated successfully' });
+    res.json({ message: 'User profile and password updated successfully' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
 
 // Delete user profile
 exports.deleteUserProfile = async (req, res) => {
