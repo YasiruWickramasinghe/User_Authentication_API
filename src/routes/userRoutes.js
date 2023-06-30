@@ -50,4 +50,6 @@ router.get('/admin', authenticateUser, authorize('admin'), (req, res) => {
   res.json({ message: 'Admin route accessed' });
 });
 
+
+
 module.exports = router;

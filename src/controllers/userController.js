@@ -22,13 +22,13 @@ exports.registerUser = async (req, res) => {
     }
 
     // Hash the password
-    //const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user
     const user = new User({
       name,
       email,
-      // password: hashedPassword,
+      password: hashedPassword,
       password,
     });
 
@@ -58,11 +58,11 @@ exports.loginUser = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    // const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    // if (!isPasswordValid) {
-    //   return res.status(401).json({ error: 'Invalid password' });
-    // }
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid password' });
+    }
 
     const accessToken = generateAccessToken(user._id);
     const refreshToken = generateRefreshToken(user._id);
