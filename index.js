@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./src/config/db');
 const errorMiddleware = require('./src/middleware/errorMiddleware');
@@ -7,6 +8,9 @@ const userRoutes = require('./src/routes/userRoutes');
 dotenv.config();
 
 const app = express();
+
+// Enable CORS
+app.use(cors());
 
 // Middleware for parsing JSON body
 app.use(express.json());
