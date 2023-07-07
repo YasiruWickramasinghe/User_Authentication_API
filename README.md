@@ -38,6 +38,13 @@ The base URL for all API endpoints is: `http://localhost:3000`.
     }
     ```
 
+- **GET /profile**
+  - Description: Get user profile details.
+  - Example: `GET /profile`
+  - Headers:
+    - Authorization: Bearer access_token
+
+
 - **PUT /profile**
   - Description: Update user profile and password.
   - Request Body:

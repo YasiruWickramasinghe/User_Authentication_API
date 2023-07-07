@@ -1,6 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator');
-const { registerUser, loginUser, updateUserProfileAndPassword, deleteUserProfile, logoutUser  } = require('../controllers/userController');
+const { registerUser, loginUser, getUserProfile, updateUserProfileAndPassword, deleteUserProfile, logoutUser  } = require('../controllers/userController');
 const authenticateUser = require('../middleware/authMiddleware');
 const authorize = require('../middleware/authorizeMiddleware');
 
@@ -27,6 +27,10 @@ router.post(
   loginUser
 );
 
+//get user
+router.get('/profile', authenticateUser, getUserProfile);
+
+//update user
 router.put(
   '/profile',
   [
