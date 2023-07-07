@@ -36,7 +36,6 @@ exports.registerUser = async (req, res) => {
 
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -72,7 +71,6 @@ exports.loginUser = async (req, res) => {
 
     res.json({ message: 'User logged in successfully', accessToken, refreshToken });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -104,7 +102,6 @@ exports.updateUserProfileAndPassword = async (req, res) => {
 
     res.json({ message: 'User profile and password updated successfully' });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -123,7 +120,6 @@ exports.deleteUserProfile = async (req, res) => {
 
     res.json({ message: 'User profile deleted successfully' });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -143,7 +139,6 @@ exports.logoutUser = async (req, res) => {
 
     res.json({ message: 'User logged out successfully' });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
