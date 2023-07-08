@@ -32,7 +32,7 @@ router.get('/profile', authenticateUser, getUserProfile);
 
 //update user
 router.put(
-  '/profile',
+  '/profileupdate',
   [
     body('name').trim().notEmpty().withMessage('Name is required'),
     body('email').trim().isEmail().withMessage('Invalid email address'),
@@ -41,8 +41,9 @@ router.put(
   updateUserProfileAndPassword
 );
 
+
 // Delete user profile
-router.delete('/profile', authenticateUser, deleteUserProfile);
+router.delete('/profiledelete', authenticateUser, deleteUserProfile);
 
 // Logout user
 router.post('/logout', authenticateUser, logoutUser);

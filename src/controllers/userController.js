@@ -21,14 +21,10 @@ exports.registerUser = async (req, res) => {
       return res.status(400).json({ error: 'Email already registered' });
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     // Create a new user
     const user = new User({
       name,
       email,
-      password: hashedPassword,
       password,
     });
 
@@ -98,6 +94,12 @@ exports.getUserProfile = async (req, res) => {
 // Update user profile and password
 exports.updateUserProfileAndPassword = async (req, res) => {
   try {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { name, email, oldPassword, newPassword } = req.body;
     const user = await User.findById(req.user._id);
 
