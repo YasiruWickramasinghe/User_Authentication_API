@@ -79,6 +79,7 @@ exports.getUserProfile = async (req, res) => {
     // Fetch the user details from the authenticated request object (req.user)
     const user = await User.findById(req.user._id);
 
+
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -105,6 +106,14 @@ exports.updateUserProfileAndPassword = async (req, res) => {
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (email !== user.email) {
+      // Email has been changed, so check if it's already registered
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).json({ error: 'Email already registered' });
+      }
     }
 
     // If provided, verify and update the password
