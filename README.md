@@ -52,7 +52,7 @@ The base URL for all API endpoints is: `http://localhost:3000`.
     - email: Email address of the user (required).
     - oldPassword: Old password for authentication (required).
     - newPassword: New password for the user (required, minimum 6 characters).
-  - Example: `PUT /profile`
+  - Example: `PUT /profileupdate`
     ```json
     {
       "name": "Harry Doe",
@@ -66,7 +66,7 @@ The base URL for all API endpoints is: `http://localhost:3000`.
 
 - **DELETE /profile**
   - Description: Delete user profile.
-  - Example: `DELETE /profile`
+  - Example: `DELETE /profiledelete`
   - Headers:
     - Authorization: Bearer access_token
 
